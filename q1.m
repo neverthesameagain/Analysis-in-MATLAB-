@@ -1,0 +1,24 @@
+R=50000;
+C=10^(-11);
+L=3.148*(10)^(-7);
+s=tf('s');
+n=(1/C)*s;
+d=s^2 + (1/(R*C))*s+1/(L*C);
+T=(1/d)*n;
+disp(T);
+x=pole(T);
+y=zero(T);
+dampratio=(1/(2*R))*((1/C)*L)^(1/2);
+natfre=1/(L*C)^(1/2);
+fprintf('Damping Ratio=');
+disp(dampratio);
+fprintf('Natural Frequency=');
+disp((1/(2*pi))*natfre);
+fprintf('pole=');
+disp(pole(T));
+fprintf('zero=');
+disp(zero(T));
+options=bodeoptions;
+options.FreqUnits = 'Hz';
+bode(T,options);
+%pzplot(T)
